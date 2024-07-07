@@ -140,6 +140,10 @@
     <ClCompile Include="C:\Users\okniz\Documents\Resources\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="program.frag" />
+    <None Include="program.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
