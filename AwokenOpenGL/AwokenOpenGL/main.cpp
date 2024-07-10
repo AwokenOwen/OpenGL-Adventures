@@ -169,7 +169,7 @@ int main()
 
 	stbi_set_flip_vertically_on_load(true);
 
-	unsigned int texture1 = loadJPG("container.jpg"); 
+	unsigned int texture1 = loadPNG("awesomeface.png"); 
 
 	ourShader.use();
 	ourShader.setInt("texture1", 0);
