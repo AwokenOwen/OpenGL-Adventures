@@ -8,6 +8,7 @@
 #include <string>
 
 #include "Shader.h"
+#include "Camera.h"
 
 //Function Protoypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -18,13 +19,11 @@ unsigned int loadJPG(const char* path);
 unsigned int loadPNG(const char* path);
 
 //Variables
+	// Screen
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 	//Camera Init
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-float pitch = 0.0f;
-float yaw = -90.0f;
-float Zoom = 45.0f;
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f); 
 	//Mouse Movement
 float lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -42,7 +41,7 @@ int main()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//NOTE: Create window
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Owen Knizak OpenGL Adventure", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Owen Knizak OpenGL Adventure", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -59,7 +58,7 @@ int main()
 	}
 
 	//NOTE: Set OpenGL Viewport
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -207,11 +206,11 @@ int main()
 
 				//World Space To View Space
 			glm::mat4 view;
-			view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+			view = camera.GetViewMatrix();
 
 				//View Space to Projection Space
 			glm::mat4 projection;
-			projection = glm::perspective(glm::radians(Zoom), 800.0f / 600.0f, 0.1f,
+			projection = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f,
 				100.0f);
 
 
@@ -252,32 +251,13 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	float yoffset = lastY - ypos; // reversed: y ranges bottom to top
 	lastX = xpos;
 	lastY = ypos;
-	const float sensitivity = 0.1f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-	yaw += xoffset; 
-	pitch += yoffset;
-
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
-	glm::vec3 direction;
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cameraFront = glm::normalize(direction);
+	
+	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	Zoom -= (float)yoffset;
-	if (Zoom < 1.0f)
-		Zoom = 1.0f;
-	if (Zoom > 45.0f)
-		Zoom = 45.0f;
+	camera.ProcessMouseScroll(yoffset);
 }
 
 
@@ -288,26 +268,18 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);
 
 	//Move Camera
-	const float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
-	glm::vec3 cameraFrontHorizontal = cameraFront;
-	cameraFrontHorizontal.y = 0.0f;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cameraFrontHorizontal;
+		camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cameraFrontHorizontal;
+		camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cameraFrontHorizontal, cameraUp)) *
-		cameraSpeed;
+		camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime); 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cameraFrontHorizontal, cameraUp)) *
-		cameraSpeed;
+		camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime); 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		cameraPos += cameraUp * cameraSpeed;
-	}if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-	{
-		cameraPos -= cameraUp * cameraSpeed;
-	}
+		camera.ProcessKeyboard(Camera_Movement::UP, deltaTime); 
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera_Movement::DOWN, deltaTime);
 
 }
 
