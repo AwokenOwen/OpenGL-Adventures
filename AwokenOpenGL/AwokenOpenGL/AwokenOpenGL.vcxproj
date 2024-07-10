@@ -72,10 +72,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,10 +139,15 @@
   <ItemGroup>
     <ClCompile Include="C:\Users\okniz\Documents\Resources\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="program.frag" />
     <None Include="program.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
