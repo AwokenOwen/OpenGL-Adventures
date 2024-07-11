@@ -135,8 +135,13 @@ int main()
 	//Set the position attribute for the shader
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
 		(void*)(3 * sizeof(float)));
-	//enable the first posistion attribute
+	//enable the second posistion attribute
 	glEnableVertexAttribArray(1);
+	//Set the position attribute for the shader
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+		(void*)(6 * sizeof(float)));
+	//enable the third posistion attribute
+	glEnableVertexAttribArray(2);
 #pragma endregion
 
 	unsigned int lightVAO;
@@ -150,6 +155,8 @@ int main()
 		(void*)0);
 	glEnableVertexAttribArray(0);
 
+	unsigned int diffuseMap = loadPNG("container2.png");
+	unsigned int specularMap = loadPNG("container2_specular.png");
 
 	Shader cubeShader("program.vert", "program.frag");
 	Shader lightShader("program.vert", "lighting.frag");
@@ -165,16 +172,34 @@ int main()
 		processInput(window);
 
 		//rendering commands
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 
-		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+		glm::vec3 lightPos(0.2f, 1.0f, 0.3f);
 
-		cubeShader.use();
-		cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-		cubeShader.setVec3("lightPos", lightPos);
+		cubeShader.use(); 
+		cubeShader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f); 
+		cubeShader.setVec3("light.diffuse", 0.75f, 0.75f, 0.75f); // darkened 
+		cubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f); 
+		cubeShader.setVec3("light.position", lightPos);
+
+		cubeShader.setFloat("light.constant", 1.0f);
+		cubeShader.setFloat("light.linear", 0.09f);
+		cubeShader.setFloat("light.quadratic", 0.032f);
+
 		cubeShader.setVec3("viewPos", camera.Position);
+		cubeShader.setInt("material.diffuse", 0);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, diffuseMap);
+
+		cubeShader.setInt("material.specular", 1);
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, specularMap);
+
+		cubeShader.setFloat("material.shininess", 32.0f);
+
 
 		glBindVertexArray(VAO);
 		//Get World Transform Matrix
@@ -206,7 +231,7 @@ int main()
 		lightShader.setMat4("view", view); 
 		lightShader.setMat4("projection", projection); 
 
-		glDrawArrays(GL_TRIANGLES, 0, 36); 
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//check and call events and swap buffers
 		glfwSwapBuffers(window);
@@ -311,7 +336,7 @@ unsigned int loadPNG(const char* path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// load and generate the texture
 	int width, height, nrChannels; 
-	unsigned char* data = stbi_load("awesomeface.png", &width, &height, 
+	unsigned char* data = stbi_load(path, &width, &height, 
 		&nrChannels, 0); 
 	if (data) 
 	{
