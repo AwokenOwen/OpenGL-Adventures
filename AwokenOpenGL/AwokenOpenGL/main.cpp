@@ -69,110 +69,90 @@ int main()
 
 	//Generate vertices and store it in the buffer
 	float vertices[] = {
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f,
+		0.5f, 0.5f, -0.5f,
+		0.5f, 0.5f, -0.5f, 
+		-0.5f, 0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
 
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f,
+		0.5f, -0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f,
+		-0.5f, 0.5f, 0.5f,
+		-0.5f, -0.5f, 0.5f,
 
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, 0.5f, 0.5f,
+		-0.5f, 0.5f, -0.5f, 
+		-0.5f, -0.5f, -0.5f, 
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, 0.5f,
+		-0.5f, 0.5f, 0.5f, 
 
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, 0.5f,
+		0.5f, 0.5f, -0.5f, 
+		0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f, 
+		0.5f, -0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f, 
 
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 
+		0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, 0.5f, 
+		0.5f, -0.5f, 0.5f, 
+		-0.5f, -0.5f, 0.5f,
+		-0.5f, -0.5f, -0.5f, 
 
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f
+		-0.5f, 0.5f, -0.5f, 
+		0.5f, 0.5f, -0.5f, 
+		0.5f, 0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f,
+		-0.5f, 0.5f, 0.5f, 
+		-0.5f, 0.5f, -0.5f
 	};
-
-	glm::vec3 cubePositions[] = {
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(2.0f, 5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f, 3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f, 2.0f, -2.5f),
-		glm::vec3(1.5f, 0.2f, -1.5f),
-		glm::vec3(-1.3f, 1.0f, -1.5f)
-	};
-
 
 	glEnable(GL_DEPTH_TEST);
 
-	unsigned int indices[] = {
-		0, 1, 3,
-		2, 3, 1
-	};
-
+#pragma region Vertex Array and Buffer SetUp
+	//Generate the ID of a Vertex Array Object
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 
+	//Generating the ID of a Vertex Buffer Object
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
-
-	// 1. bind Vertex Array Object
+	//Bind the Vertex Array
 	glBindVertexArray(VAO);
-	// 2. copy our vertices array in a buffer for OpenGL to use
+
+	//Bind the buffer to the GL_ARRAY_BUFFER target
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	//Copy the data in GL_ARRAY_BUFFER into memory of the GPU
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	// 3. copy our index array in a element buffer for OpenGL to use
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// 4. then set our vertex attributes pointers
-		// First argument is the ID of the attribute correlates to the location = n in shader code
-		// Second argument is how many points there are in the attribute correlates to vecn in shader code
-		// Third argument is what the data type is
-		// IDK what the fourth argument is
-		// Fifth argument is length of 
-			//pos attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
+
+	//Set the position attribute for the shader
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+		(void*)0);
+	//enable the first posistion attribute
+	glEnableVertexAttribArray(0);
+#pragma endregion
+
+	unsigned int lightVAO;
+	glGenVertexArrays(1, &lightVAO);
+	glBindVertexArray(lightVAO);
+	// we only need to bind to the VBO, the container’s VBO’s data
+	// already contains the data.
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	// set the vertex attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
 		(void*)0);
 	glEnableVertexAttribArray(0);
-			//texture attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 
-		(void*)(3 * sizeof(float))); 
-	glEnableVertexAttribArray(1); 
 
-	Shader ourShader("program.vert", "program.frag");
 
-	stbi_set_flip_vertically_on_load(true);
-
-	unsigned int texture1 = loadPNG("awesomeface.png"); 
-
-	ourShader.use();
-	ourShader.setInt("texture1", 0);
+	Shader cubeShader("program.vert", "program.frag");
+	Shader lightShader("program.vert", "lighting.frag");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -188,40 +168,43 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture1); 
+		cubeShader.use();
+		cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+		cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
-		glBindVertexArray(VAO); 
+		glBindVertexArray(VAO);
+		//Get World Transform Matrix
+				//Get Identity Matrix
+		glm::mat4 model = glm::mat4(1.0f);
 
-		//Drawing
-		for (unsigned int i = 0; i < 10; i++)
-		{
-			//3D Matrices Calculations
-				//Local Space To World Space
-			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, cubePositions[i]);
-			float angle = 20.0f * (i + 1);
-			model = glm::rotate(model, glm::radians(angle),
-				glm::vec3(1.0f, 0.3f, 0.5f));
+		//Get View Matrix
+		glm::mat4 view = camera.GetViewMatrix();
 
-				//World Space To View Space
-			glm::mat4 view;
-			view = camera.GetViewMatrix();
+		//Get Perspective Projection Matrix
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f,
+			100.0f);
 
-				//View Space to Projection Space
-			glm::mat4 projection;
-			projection = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f,
-				100.0f);
+		cubeShader.setMat4("model", model);
+		cubeShader.setMat4("view", view);
+		cubeShader.setMat4("projection", projection);
 
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-			//Set the Matices in the shader
-			ourShader.setMat4("model", model);
-			ourShader.setMat4("view", view); 
-			ourShader.setMat4("projection", projection); 
+		lightShader.use();
 
-			//Draw the cubes
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
+		glBindVertexArray(lightVAO);
+
+		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+
+		model = glm::mat4(1.0f); 
+		model = glm::translate(model, lightPos); 
+		model = glm::scale(model, glm::vec3(0.2f)); 
+
+		lightShader.setMat4("model", model); 
+		lightShader.setMat4("view", view); 
+		lightShader.setMat4("projection", projection); 
+
+		glDrawArrays(GL_TRIANGLES, 0, 36); 
 
 		//check and call events and swap buffers
 		glfwSwapBuffers(window);
