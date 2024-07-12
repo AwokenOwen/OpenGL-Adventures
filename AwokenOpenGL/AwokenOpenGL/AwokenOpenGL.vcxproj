@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;C:\Users\okniz\Documents\Resources\Assimp\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;C:\Users\okniz\Documents\Resources\Assimp\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\include;C:\Users\okniz\Documents\Resources\glad\include;C:\Users\okniz\Documents\Resources\glm;C:\Users\okniz\Documents\Resources\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\okniz\Documents\Resources\glfw-3.4.bin.WIN64\lib-vc2022;C:\Users\okniz\Documents\Resources\Assimp\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

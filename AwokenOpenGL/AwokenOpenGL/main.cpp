@@ -193,11 +193,11 @@ int main()
 	//enable the first posistion attribute
 	glEnableVertexAttribArray(0);	
 
-	unsigned int diffuseMap = loadPNG("container2.png");
-	unsigned int specularMap = loadPNG("container2_specular.png");
+	unsigned int diffuseMap = loadPNG("assets/container2.png");
+	unsigned int specularMap = loadPNG("assets/container2_specular.png");
 
-	Shader cubeShader("program.vert", "program.frag");
-	Shader lightShader("program.vert", "lighting.frag");
+	Shader cubeShader("assets/program.vert", "assets/program.frag");
+	Shader lightShader("assets/program.vert", "assets/lighting.frag");
 
 	while (!glfwWindowShouldClose(window))
 	{
