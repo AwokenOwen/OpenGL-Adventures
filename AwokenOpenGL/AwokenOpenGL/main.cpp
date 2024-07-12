@@ -121,6 +121,11 @@ int main()
 
 	};
 
+	unsigned int indices[] = { // note that we start from 0!
+		0, 1, 3, // first triangle
+		1, 2, 3 // second triangle
+	};
+
 	glm::vec3 pointLightPositions[] = {
 		glm::vec3(0.7f, 0.2f, 2.0f),
 		glm::vec3(2.3f, -3.3f, -4.0f),
@@ -140,6 +145,10 @@ int main()
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 
+	//Generating the ID of the Element Buffer Object for the indices
+	unsigned int EBO;
+	glGenBuffers(1, &EBO);
+
 	//Bind the Vertex Array
 	glBindVertexArray(VAO);
 
@@ -148,6 +157,13 @@ int main()
 
 	//Copy the data in GL_ARRAY_BUFFER into memory of the GPU
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//Bind the buffer to the GL_ELEMENT_ARRAY_BUFFER target
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	//Copy the data in GL_ELEMENT_ARRAY_BUFFER into the memory of the GPU
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+		GL_STATIC_DRAW);
 
 	//Set the position attribute for the shader
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
