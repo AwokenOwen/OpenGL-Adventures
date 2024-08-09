@@ -14,14 +14,14 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void processInput(GLFWwindow* window);
+void processInput(GLFWwindow* window, Shader* shader);
 unsigned int loadJPG(const char* path);
 unsigned int loadPNG(const char* path);
 
 //Variables
 	// Screen
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 	//Camera Init
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f); 
 	//Mouse Movement
@@ -206,14 +206,14 @@ int main()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
+		cubeShader.use();
+
 		//input
-		processInput(window);
+		processInput(window, &cubeShader);
 
 		//rendering commands
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-
-		cubeShader.use(); 
 
 		//Directional Light Uniforms
 		glm::vec3 DirectionalDiffuse = glm::vec3(0.75f, 0.75f, 0.25f);
@@ -283,7 +283,7 @@ int main()
 		glm::mat4 view = camera.GetViewMatrix(); 
 
 		//Get Perspective Projection Matrix
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f,
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f,
 			100.0f); 
 
 		glBindVertexArray(VAO);
@@ -357,7 +357,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 }
 
 
-void processInput(GLFWwindow* window)
+void processInput(GLFWwindow* window, Shader* shader)
 {
 	//Quit
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -376,6 +376,21 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(Camera_Movement::UP, deltaTime); 
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 		camera.ProcessKeyboard(Camera_Movement::DOWN, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+	{
+		shader->setVec3("flashlights[0].position", camera.Position);
+		shader->setVec3("flashlights[0].direction", camera.Front);
+		shader->setVec3("flashlights[0].diffuse", glm::vec3(1.0f));
+		shader->setVec3("flashlights[0].specular", glm::vec3(1.0f));
+
+		shader->setFloat("flashlights[0].cutOff", glm::cos(glm::radians(12.5f)));
+		shader->setFloat("flashlights[0].outerCutOff", glm::cos(glm::radians(30.0f)));
+		shader->setFloat("flashlights[0].power", 50.0f);
+	}
+	else
+	{
+		shader->setFloat("flashlights[0].power", 0.0f);
+	}
 }
 
 unsigned int loadJPG(const char* path) 
