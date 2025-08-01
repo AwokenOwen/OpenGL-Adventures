@@ -112,11 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\okniz\OneDrive\Documents\Resources\glm;C:\Users\okniz\OneDrive\Documents\Resources\glfw-3.4\include;C:\Users\okniz\OneDrive\Documents\Resources\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\okniz\OneDrive\Documents\Resources\assimp\build\lib\Release;C:\Users\okniz\OneDrive\Documents\Resources\glfw-3.4\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,6 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\okniz\OneDrive\Documents\Resources\glm;C:\Users\okniz\OneDrive\Documents\Resources\glfw-3.4\include;C:\Users\okniz\OneDrive\Documents\Resources\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,16 +137,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\okniz\OneDrive\Documents\Resources\assimp\build\lib\Release;C:\Users\okniz\OneDrive\Documents\Resources\glfw-3.4\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\okniz\Documents\Resources\glad\src\glad.c" />
+    <ClCompile Include="C:\Users\okniz\OneDrive\Documents\Resources\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="program.frag" />
-    <None Include="program.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
